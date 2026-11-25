@@ -1,0 +1,31 @@
+name: Compila Grimorio
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 * * 1"   # ogni lunedì aggiorna il catalogo
+permissions:
+  contents: write
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Catalogo (Internet Archive + Wikidata)
+        run: pip install requests && python scripts/build_catalog.py
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: "17" }
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: "8.9" }
+      - name: Compila APK
+        run: gradle --no-daemon assembleRelease && cp app/build/outputs/apk/release/app-release.apk Grimorio.apk
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Grimorio ${{ github.run_number }}
+          make_latest: true
+          files: Grimorio.apk
