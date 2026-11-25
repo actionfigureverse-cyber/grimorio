@@ -18,8 +18,8 @@ jobs:
         run: pip install requests && python scripts/build_catalog.py
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: "17" }
-      - uses: android-actions/setup-android@v3
-      - uses: gradle/actions/setup-gradle@v4
+    
+     - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: "8.9" }
       - name: Compila APK
         run: gradle --no-daemon assembleRelease && cp app/build/outputs/apk/release/app-release.apk Grimorio.apk
