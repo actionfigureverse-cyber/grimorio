@@ -36,7 +36,7 @@ jobs:
           make_latest: true
           files: Grimorio.apk
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: app/src/main/assets
       - id: sito
