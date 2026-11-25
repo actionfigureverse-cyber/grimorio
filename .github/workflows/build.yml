@@ -5,9 +5,14 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  pages: write
+  id-token: write
 jobs:
   apk:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.sito.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,3 +35,9 @@ jobs:
           name: Grimorio ${{ github.run_number }}
           make_latest: true
           files: Grimorio.apk
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/src/main/assets
+      - id: sito
+        uses: actions/deploy-pages@v4
