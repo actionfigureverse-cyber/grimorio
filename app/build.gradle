@@ -1,0 +1,25 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'it.grimorio.tv'
+    compileSdk 34
+    defaultConfig {
+        applicationId 'it.grimorio.tv'
+        minSdk 22
+        targetSdk 34
+        versionCode((System.getenv('GITHUB_RUN_NUMBER') ?: '1') as int)
+        versionName "1.0." + (System.getenv('GITHUB_RUN_NUMBER') ?: '0')
+    }
+    signingConfigs {
+        grimorio {
+            storeFile file('grimorio.keystore')
+            storePassword 'grimorio'
+            keyAlias 'grimorio'
+            keyPassword 'grimorio'
+        }
+    }
+    buildTypes {
+        release { minifyEnabled false; signingConfig signingConfigs.grimorio }
+        debug { signingConfig signingConfigs.grimorio }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_1_8; targetCompatibility JavaVersion.VERSION_1_8 }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Grimorio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header id="top">
+  <div class="logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 6h20a4 4 0 0 1 4 4v24H12a4 4 0 0 1-4-4z" fill="#3a2a1a" stroke="#d9b26a" stroke-width="2"/><path d="M20 12l3 6 6 1-4.5 4 1 6L20 26l-5.5 3 1-6L11 19l6-1z" fill="#d9b26a"/></svg><span>Grimorio</span></div>
+  <nav id="nav">
+    <button data-f data-act="view" data-v="home">Home</button>
+    <button data-f data-act="view" data-v="fantasy">Fantasy</button>
+    <button data-f data-act="view" data-v="classici">Classici</button>
+    <button data-f data-act="view" data-v="piattaforme">Piattaforme</button>
+    <button data-f data-act="view" data-v="diretta">TV in diretta</button>
+    <button data-f data-act="view" data-v="lista">La mia lista</button>
+    <button data-f data-act="view" data-v="cerca" class="ico" aria-label="Cerca"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+  </nav>
+</header>
+<main id="main"></main>
+<div id="modal" hidden></div>
+<div id="player" hidden>
+  <video id="vid" playsinline></video>
+  <div id="pbar">
+    <div id="ptitle"></div>
+    <div class="track"><div id="pfill"></div></div>
+    <div class="ptime"><span id="pcur">0:00</span><span id="phint">OK pausa · ◀ ▶ 10 secondi · Indietro per uscire</span><span id="pdur">0:00</span></div>
+  </div>
+  <div id="pmsg"></div>
+</div>
+<div id="toast"></div>
+<script src="config.js"></script>
+<script src="channels.js"></script>
+<script src="catalog.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
